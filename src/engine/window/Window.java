@@ -1,19 +1,19 @@
 package engine.window;
 
-import engine.map.Din;
+import engine.map.Generation;
+import engine.map.Map;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by USER on 20.02.2017.
  */
 public class Window extends BasicGame{
-    ArrayList<Integer> arr;
+    int[] arr;
     Camera camera;
     Input input;
-
+    Map map;
     public Window(String title) {
         super(title);
     }
@@ -27,23 +27,25 @@ public class Window extends BasicGame{
 
 
 
-        camera = new Camera(0,0);
+        camera = new Camera(0,250 * 32);
         input = gameContainer.getInput();
-
-        arr = Din.getSmoothRandom(400,70,120,Din.PLAIN,Din.PLAIN);
+        map = new Map();
+        arr = Generation.getRandomLeft(400,70,120,Generation.PLAIN,Generation.PLAIN);
     }
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
         input = gameContainer.getInput();
+        map.checkEndChunks(camera);
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        graphics.drawString("Chunks are loaded: " + map.getChunksSize(), 10,60);
+
         camera.translate(graphics, input);
-        for(int i = 0; i < arr.size(); i++){
-            graphics.drawRect(i*32, gameContainer.getHeight() - 32 * arr.get(i),32, 32 * arr.get(i));
-        }
+
+        map.drawChunks(graphics, camera);
 
     }
 }
