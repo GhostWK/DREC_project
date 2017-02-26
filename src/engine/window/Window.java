@@ -2,6 +2,8 @@ package engine.window;
 
 import engine.map.Generation;
 import engine.map.Map;
+import engine.map.Tile;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 
 import java.util.ArrayList;
@@ -24,10 +26,10 @@ public class Window extends BasicGame{
         gameContainer.setAlwaysRender(true);
         gameContainer.setVSync(true);
 
+        Tile.initImages();
 
 
-
-        camera = new Camera(0,250 * 32);
+        camera = new Camera(0,184 * Tile.getSizeOfBlock());
         input = gameContainer.getInput();
         map = new Map();
         arr = Generation.getRandomLeft(400,70,120,Generation.PLAIN,Generation.PLAIN);
@@ -42,8 +44,7 @@ public class Window extends BasicGame{
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
         graphics.drawString("Chunks are loaded: " + map.getChunksSize(), 10,60);
-
-        camera.translate(graphics, input);
+        camera.translate(graphics, input, gameContainer);
 
         map.drawChunks(graphics, camera);
 

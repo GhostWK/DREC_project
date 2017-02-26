@@ -33,7 +33,8 @@ public class Generation {
         int[] arr = new int[num];
         Random r = new Random();
         arr[num - 1] = first;
-        for(int i = num - 2; i >= 0; i--){
+        System.out.println(arr[num - 1]);
+        for(int i = num - 2; i >= 0; --i){
             while (true){
                 int temp = r.nextInt(max);
                 if(temp < arr[i+1] + r.nextInt(upD) && temp > arr[i+1] - r.nextInt(downD)){

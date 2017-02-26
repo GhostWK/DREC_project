@@ -94,8 +94,8 @@ public class Chunk {
     public void fillBlocks(){
 
         if(id >= 0) heights = Generation.getRandomRight(WIDTH_OF_CHUNK, startheight, HEIGHT_OF_CHUNK, DOWN_GENERATION, UP_GENERATION);
-        else heights = Generation.getRandomRight(WIDTH_OF_CHUNK, startheight, HEIGHT_OF_CHUNK, DOWN_GENERATION, UP_GENERATION);
-        //for(int x : heights) System.out.println(x);
+        else heights = Generation.getRandomLeft(WIDTH_OF_CHUNK, startheight, HEIGHT_OF_CHUNK, DOWN_GENERATION, UP_GENERATION);
+
         for(int i = 0; i < HEIGHT_OF_CHUNK; i++){
             for(int j = 0; j < WIDTH_OF_CHUNK; j++){
                 if(i < HEIGHT_OF_CHUNK - heights[j]) frontBlocks[i][j] = 0;
